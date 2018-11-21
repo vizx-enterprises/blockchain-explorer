@@ -56,7 +56,7 @@ $(document).ready(function () {
     paging: false,
     lengthMenu: -1,
     language: {
-      emptyTable: "No Transactions Currently in the Mempool"
+      emptyTable: "No Transactions Currently in the Transaction Pool"
     }
   }).columns.adjust().responsive.recalc()
 
