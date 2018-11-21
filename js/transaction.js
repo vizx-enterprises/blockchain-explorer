@@ -48,7 +48,7 @@ $(document).ready(function () {
         var input = txn.tx.inputs[i]
         inputs.row.add([
           numeral(input.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00'),
-          (input.keyImage.length === 0) ? 'Coinbase' : input.keyImage,
+          (input.keyImage.length === 0) ? 'Miner Reward' : input.keyImage,
           input.type.toUpperCase()
         ])
       }
