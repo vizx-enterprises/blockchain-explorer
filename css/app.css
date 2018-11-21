@@ -81,3 +81,7 @@ footer {
 a {
   color: #00853d;
 }
+
+.navbar-link.is-active, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:hover {
+  color: #00853d !important;
+}

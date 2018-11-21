@@ -13,11 +13,11 @@ $(document).ready(function () {
     success: function (txn) {
       $('#transactionHeaderHash').text(txn.tx.hash)
       $('#transactionTimestamp').text((new Date(txn.block.timestamp * 1000)).toGMTString())
-      $('#transactionFee').text(numeral(txn.tx.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00'))
+      $('#transactionFee').text(numeral(txn.tx.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
       $('#transactionConfirmations').text(numeral(txn.block.depth).format('0,0'))
       $('#transactionSize').text(numeral(txn.tx.size).format('0,0') + ' bytes')
       $('#transactionRingSize').text(numeral(txn.tx.mixin).format('0,0'))
-      $('#transactionAmount').text(numeral(txn.tx.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00'))
+      $('#transactionAmount').text(numeral(txn.tx.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
       $('#transactionPaymentId').text(txn.tx.paymentId)
       $('#blockHash').text(txn.block.hash)
       $('#transactionNonce').text(txn.tx.nonce)
