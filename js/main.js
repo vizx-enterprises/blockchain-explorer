@@ -7,6 +7,14 @@ $(window).resize(function () {
 })
 
 $(document).ready(function () {
+  const searchTerm = getQueryStringParam('search')
+  /* If we were given a search term, let's plug it in
+     and then run a search for them */
+  if (searchTerm && searchTerm.length !== 0) {
+    $('#searchValue').val(searchTerm)
+    searchForTerm(searchTerm)
+  }
+  
   google.charts.load('current', {
     packages: ['corechart']
   })
@@ -57,7 +65,8 @@ $(document).ready(function () {
     lengthMenu: -1,
     language: {
       emptyTable: "No Transactions Currently in the Transaction Pool"
-    }
+    },
+    autoWidth: false
   }).columns.adjust().responsive.recalc()
 
   recentBlocks = $('#recentBlocks').DataTable({
@@ -79,7 +88,8 @@ $(document).ready(function () {
     lengthMenu: -1,
     language: {
       emptyTable: "No recent blocks found"
-    }
+    },
+    autoWidth: false
   }).columns.adjust().responsive.recalc()
 
   getAndDisplayLastBlockHeader()
@@ -190,6 +200,8 @@ function updateRecentBlocks(table, height) {
 }
 
 function drawBlockchainChart() {
-  blockchainChart = new google.visualization.AreaChart(document.getElementById('blockchainChart'))
-  blockchainChart.draw(blockchainChartData, blockchainChartOptions)
+  try {
+    blockchainChart = new google.visualization.AreaChart(document.getElementById('blockchainChart'))
+    blockchainChart.draw(blockchainChartData, blockchainChartOptions)
+  } catch (e) {}
 }

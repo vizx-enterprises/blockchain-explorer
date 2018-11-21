@@ -41,7 +41,8 @@ $(document).ready(function () {
         lengthMenu: -1,
         language: {
           emptyTable: "No Transaction Inputs"
-        }
+        },
+        autoWidth: false
       }).columns.adjust().responsive.recalc()
 
       for (var i = 0; i < txn.tx.inputs.length; i++) {
@@ -69,7 +70,8 @@ $(document).ready(function () {
         lengthMenu: -1,
         language: {
           emptyTable: "No Transaction Outputs"
-        }
+        },
+        autoWidth: false
       }).columns.adjust().responsive.recalc()
 
       for (var i = 0; i < txn.tx.outputs.length; i++) {

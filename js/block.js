@@ -47,7 +47,8 @@ $(document).ready(function () {
         lengthMenu: -1,
         language: {
           emptyTable: "No Transactions In This Block"
-        }
+        },
+        autoWidth: false
       }).columns.adjust().responsive.recalc()
 
       for (var i = 0; i < block.transactions.length; i++) {

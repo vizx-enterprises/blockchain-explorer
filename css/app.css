@@ -56,9 +56,17 @@ footer {
 
 #transactionPool,
 #recentBlocks,
+#transactions,
+#transactionInputs,
+#transactionOutputs,
+#paymentIdTransactions,
 .table {
   font-size: 9pt;
   font-family: "Lucida Console", Monaco, monospace;
+}
+
+#paymentIdTransactions_filter, #paymentIdTransactions_paginate, #paymentIdTransactions_length {
+  font-size: 8pt !important;
 }
 
 .dataTables_wrapper {
@@ -84,4 +92,29 @@ a {
 
 .navbar-link.is-active, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:hover {
   color: #00853d !important;
+}
+
+.trtl-amount, .trtl-fee, .trtl-type, .trtl-size, .trtl-txns, .trtl-datetime, .trtl-icon {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.trtl-amount, .trtl-fee {
+  width: 175px;
+}
+
+.trtl-type {
+  width: 100px;
+}
+
+.trtl-size, .trtl-txns {
+  width: 100px;
+}
+
+.trtl-datetime {
+  width: 280px;
+}
+
+.trtl-icon {
+  width: 15px;
 }
