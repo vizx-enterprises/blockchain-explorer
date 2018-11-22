@@ -14,10 +14,6 @@ $(document).ready(function () {
     $('#searchValue').val(searchTerm)
     searchForTerm(searchTerm)
   }
-  
-  google.charts.load('current', {
-    packages: ['corechart']
-  })
 
   blockchainChartOptions = {
     legend: {

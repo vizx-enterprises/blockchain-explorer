@@ -1,3 +1,8 @@
+const localData = {}
+google.charts.load('current', {
+  packages: ['corechart']
+})
+
 $(document).ready(function () {
   $('#searchButton').click(function () {
     searchForTerm($('#searchValue').val())
@@ -14,6 +19,27 @@ $(document).ready(function () {
 function isHash(str) {
   const regex = new RegExp('^[0-9a-fA-F]{64}$')
   return regex.test(str)
+}
+
+function getCurrentNetworkHashRateLoop() {
+  $.ajax({
+    url: ExplorerConfig.apiBaseUrl + '/block/header/top',
+    dataType: 'json',
+    type: 'GET',
+    cache: 'false',
+    success: function (header) {
+      localData.networkHashRate = Math.floor(header.difficulty / ExplorerConfig.blockTargetTime)
+      $('#globalHashRate').text(numeral(localData.networkHashRate).format('0,0') + ' H/s')
+      setTimeout(function () {
+        getCurrentNetworkHashRateLoop()
+      }, 15000)
+    },
+    error: function () {
+      setTimeout(function () {
+        getCurrentNetworkHashRateLoop()
+      }, 15000)
+    }
+  })
 }
 
 function searchForTerm(term) {
