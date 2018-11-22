@@ -57,22 +57,23 @@ $(document).ready(function () {
     autoWidth: false
   }).columns.adjust().responsive.recalc().draw(false)
 
-  $.ajax({
-    url: 'https://raw.githubusercontent.com/turtlecoin/turtlecoin-pools-json/master/v2/turtlecoin-pools.json',
-    dataType: 'json',
-    method: 'GET',
-    cache: 'true',
-    success: function (data) {
-      localData.pools = data.pools
-      loadPools(data.pools)
-    },
-    error: function () {
-
-    }
+  google.charts.setOnLoadCallback(function() {
+    $.ajax({
+      url: ExplorerConfig.poolListUrl,
+      dataType: 'json',
+      method: 'GET',
+      cache: 'true',
+      success: function (data) {
+        localData.pools = data.pools
+        loadPools(data.pools)
+        getCurrentNetworkHashRateLoop()
+        updatePoolInfoLoop()
+      },
+      error: function () {
+        alert('Could not retrieve list of pools from + ' + ExplorerConfig.poolListUrl)
+      }
+    })
   })
-
-  getCurrentNetworkHashRateLoop()
-  updatePoolInfoLoop()
 })
 
 function updatePoolInfoLoop() {

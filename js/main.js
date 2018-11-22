@@ -88,25 +88,27 @@ $(document).ready(function () {
     autoWidth: false
   }).columns.adjust().responsive.recalc()
 
-  getAndDisplayLastBlockHeader()
+  google.charts.setOnLoadCallback(function() {
+    getAndDisplayLastBlockHeader()
 
-  function setLastBlockTimer() {
-    setTimeout(function () {
-      getAndDisplayLastBlockHeader()
-      setLastBlockTimer()
-    }, 5000)
-  }
-  setLastBlockTimer()
+    function setLastBlockTimer() {
+      setTimeout(function () {
+        getAndDisplayLastBlockHeader()
+        setLastBlockTimer()
+      }, 15000)
+    }
+    setLastBlockTimer()
 
-  updateTransactionPool(transactionPool)
+    updateTransactionPool(transactionPool)
 
-  function setTransactionPoolTimer() {
-    setTimeout(function () {
-      updateTransactionPool(transactionPool)
-      setTransactionPoolTimer()
-    }, 5000)
-  }
-  setTransactionPoolTimer()
+    function setTransactionPoolTimer() {
+      setTimeout(function () {
+        updateTransactionPool(transactionPool)
+        setTransactionPoolTimer()
+      }, 15000)
+    }
+    setTransactionPoolTimer()
+  })
 })
 
 function getAndDisplayLastBlockHeader() {
@@ -176,7 +178,7 @@ function updateRecentBlocks(table, height) {
       for (var i = 0; i < data.length; i++) {
         var block = data[i]
         chartData.push(
-          [block.timestamp, block.difficulty, block.size, block.tx_count]
+          [parseInt(block.timestamp), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
         )
         table.row.add([
           numeral(block.height).format('0,0'),
