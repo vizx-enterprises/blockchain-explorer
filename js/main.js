@@ -42,7 +42,36 @@ $(document).ready(function () {
       height: '75%',
       width: '100%',
     },
-    colors: ['#40c18e', '#8e7cc3', '#00853d', '#f6b26b', '#212721', '#fac5c3', '#6d9eeb', '#45818e', '#de5f5f']
+    vAxes: {
+      0: {
+        logScale: true
+      },
+      1: {
+        logScale: false
+      },
+      2: {
+        logScale: true
+      }
+      ,
+      3: {
+        logScale: true
+      }
+    },
+    series: {
+      0: {
+        targetAxisIndex: 0
+      },
+      1: {
+        targetAxisIndex: 1
+      },
+      2: {
+        targetAxisIndex: 2
+      },
+      3: {
+        targetAxisIndex: 3
+      }
+    },
+    colors: ['#f6b26b', '#40c18e', '#8e7cc3', '#00853d', '#212721', '#fac5c3', '#6d9eeb', '#45818e', '#de5f5f']
   }
 
   const transactionPool = $('#transactionPool').DataTable({
@@ -178,7 +207,7 @@ function updateRecentBlocks(table, height) {
       for (var i = 0; i < data.length; i++) {
         var block = data[i]
         chartData.push(
-          [parseInt(block.timestamp), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
+          [(new Date(block.timestamp * 1000)), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
         )
         table.row.add([
           numeral(block.height).format('0,0'),
