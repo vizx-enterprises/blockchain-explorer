@@ -1,7 +1,10 @@
 const localData = {}
-google.charts.load('current', {
-  packages: ['corechart']
-})
+
+if (typeof google !== 'undefined') {
+  google.charts.load('current', {
+    packages: ['corechart']
+  })
+}
 
 $(document).ready(function () {
   $('#searchButton').click(function () {
