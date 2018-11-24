@@ -58,183 +58,47 @@ $(document).ready(function () {
   }).columns.adjust().responsive.recalc().draw(false)
 
   google.charts.setOnLoadCallback(function () {
-    $.ajax({
-      url: ExplorerConfig.poolListUrl,
-      dataType: 'json',
-      method: 'GET',
-      cache: 'true',
-      success: function (data) {
-        localData.pools = data.pools
-        loadPools(data.pools)
-        getCurrentNetworkHashRateLoop()
-        updatePoolInfoLoop()
-      },
-      error: function () {
-        alert('Could not retrieve list of pools from + ' + ExplorerConfig.poolListUrl)
-      }
-    })
+    getCurrentNetworkHashRateLoop()
+    getAndDrawPoolStats()
   })
 })
 
-function updatePoolInfoLoop() {
-  setTimeout(function () {
-    updatePoolInfo()
-    drawPoolPieChart()
-    updatePoolInfoLoop()
-  }, 15000)
-}
-
-function updatePoolInfo() {
-  localData.poolTable.rows().every(function (idx, tableLoop, rowLoop) {
-    var row = this.data()
-    var that = this
-
-    var api = getPoolApiUrl(row[1], row[2])
-
-    $.getJSON(api, function (data) {
-      if (row[2].toLowerCase() !== 'node.js') {
-        data = parsePoolData(data, row[2])
-        row[4] = numeral(data.height).format('0,0')
-        row[5] = data.hashrate
-        row[6] = numeral(data.miners).format('0,0')
-        row[7] = numeral(data.fee).format('0,0.00') + '%'
-        row[8] = data.payout
-        row[9] = data.lastblock
-        that.invalidate()
-      } else {
-        $.getJSON(row[1] + 'network/stats', function (net) {
-          $.getJSON(row[1] + 'config', function (config) {
-            data.networkData = net
-            data.poolConfig = config
-            data = parsePoolData(data, row[2])
-            row[4] = numeral(data.height).format('0,0')
-            row[5] = data.hashrate
-            row[6] = numeral(data.miners).format('0,0')
-            row[7] = numeral(data.fee).format('0,0.00') + '%'
-            row[8] = data.payout
-            row[9] = data.lastblock
-            that.invalidate()
-          })
-        })
+function getAndDrawPoolStats() {
+  $.ajax({
+    url: ExplorerConfig.poolApiUrl,
+    dataType: 'json',
+    method: 'GET',
+    cache: 'true',
+    success: function (data) {
+      localData.poolTable.clear()
+      for (var i = 0; i < data.length; i++) {
+        var pool = data[i]
+        localData.poolTable.row.add([
+          pool.name,
+          pool.api,
+          pool.type,
+          {
+            name: pool.name,
+            url: pool.url
+          },
+          numeral(pool.height).format('0,0'),
+          pool.hashrate,
+          numeral(pool.miners).format('0,0'),
+          numeral(pool.fee).format('0,0.00') + '%',
+          pool.minPayout,
+          pool.lastblock
+        ])
       }
-    })
-  })
-  localData.poolTable.draw()
-}
-
-function loadPools(pools) {
-  $.each(pools, function (index, pool) {
-    getAndDrawPoolInfo(pool)
-  })
-}
-
-function getAndDrawPoolInfo(pool) {
-  var api = getPoolApiUrl(pool.api, pool.type)
-
-  $.getJSON(api, function (data) {
-    data.name = pool.name,
-      data.api = pool.api
-    data.type = pool.type
-    data.url = pool.url
-
-    if (pool.type.toLowerCase() !== 'node.js') {
-      drawPoolData(data, pool.type)
-    } else {
-      $.getJSON(pool.api + 'network/stats', function (net) {
-        $.getJSON(pool.api + 'config', function (config) {
-          data.networkData = net
-          data.poolConfig = config
-          drawPoolData(data, pool.type)
-        })
-      })
+      localData.poolTable.draw(false)
+      drawPoolPieChart()
+    },
+    error: function () {
+      alert('Could not retrieve pool statistics from + ' + ExplorerConfig.poolApiUrl)
     }
   })
-}
-
-function getPoolApiUrl(api, type) {
-  switch (type.toLowerCase()) {
-    case 'forknote':
-      api = api + 'stats'
-      break
-    case 'node.js':
-      api = api + 'pool/stats'
-      break
-    case 'other':
-      break
-  }
-  return api
-}
-
-function drawPoolData(data, type) {
-  var poolData = parsePoolData(data, type)
-
-  localData.poolTable.row.add([
-    data.name,
-    data.api,
-    data.type,
-    {
-      name: data.name,
-      url: data.url
-    },
-    numeral(poolData.height).format('0,0'),
-    poolData.hashrate,
-    numeral(poolData.miners).format('0,0'),
-    numeral(poolData.fee).format('0,0.00') + '%',
-    poolData.payout,
-    poolData.lastblock
-  ]).draw(false)
-  drawPoolPieChart()
-}
-
-function parsePoolData(data, type) {
-  var result = {
-    height: 0,
-    hashrate: 0,
-    miners: 0,
-    fee: 0,
-    payout: 0,
-    lastblock: 0
-  }
-
-  switch (type.toLowerCase()) {
-    case 'forknote':
-      result = {
-        height: data.network.height,
-        hashrate: parseInt(data.pool.hashrate),
-        miners: data.pool.miners,
-        fee: data.config.fee,
-        payout: data.config.minPaymentThreshold,
-        lastblock: parseInt(data.pool.lastBlockFound)
-      }
-      if (data.config.donation) {
-        $.each(Object.keys(data.config.donation), function (idx, elem) {
-          result.fee = parseFloat(data.config.donation[elem]) + result.fee
-        })
-      }
-      break;
-    case 'node.js':
-      result = {
-        height: data.networkData.height,
-        hashrate: parseInt(data.pool_statistics.hashRate),
-        miners: data.pool_statistics.miners,
-        fee: data.poolConfig.pplns_fee,
-        payout: data.poolConfig.min_wallet_payout,
-        lastblock: (parseInt(data.pool_statistics.lastBlockFoundTime) * 1000)
-      }
-      break
-    case 'other':
-      result = {
-        height: data.height,
-        hashrate: parseInt(data.hashRate),
-        miners: data.miners,
-        fee: data.fee,
-        payout: (data.minimum * Math.pow(10, ExplorerConfig.decimalPoints)),
-        lastblock: (parseInt(data.lastBlockFoundTime) * 1000)
-      }
-      break
-  }
-
-  return result
+  setTimeout(() => {
+    getAndDrawPoolStats()
+  }, 15000)
 }
 
 function drawPoolPieChart() {
