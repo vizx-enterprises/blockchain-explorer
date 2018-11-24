@@ -23,6 +23,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="/js/config.js"></script>
     <script src="/js/common.js"></script>
+    <script src="/js/cryptonote.min.js"></script>
     <script src="/js/transaction.js"></script>
     <link rel="stylesheet" href="/css/app.css">
   </head>
@@ -41,7 +42,6 @@
       <div id="siteNavBar" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item" href="/"><i class="fas fa-dice-d6"></i>&nbsp; Block Explorer</a>
-          <a class="navbar-item" href="/checktransaction.html"><i class="fas fa-exchange-alt"></i>&nbsp; Check Transaction</a>
           <a class="navbar-item" href="/pools.html"><i class="fas fa-users"></i>&nbsp; Pools</a>
         </div>
         <div class="navbar-end">
@@ -143,6 +143,16 @@
                     <th class="trtl-type"><i class="fas fa-layer-group"></i>&nbsp; Type</th>
                   </tr>
                 </thead>
+              </table>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-user-check"></i>&nbsp; Check Transaction<span id="ourAmount">&nbsp;</span></p>
+            <div class="panel-block">
+              <table class="table is-fullwidth">
+                <td><input id="privateViewKey" type="text" class="input" size="70" maxlength="64" placeholder="64 Character Private View or Transaction Key" /></td>
+                <td><input id="recipientAddress" type="text" class="input" size="70" placeholder="Recipient Address" /></td>
+                <td><a class="button is-info is-trtl-green" id="checkTransaction"><i class="fas fa-search"></i>&nbsp; Check Transaction</a></td>
               </table>
             </div>
           </div>
