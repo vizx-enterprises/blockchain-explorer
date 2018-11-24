@@ -140,41 +140,11 @@ function checkTransaction() {
   }
 
   try {
-    var decodedAddress = Base58.decode(recipient)
-    var encodedPrefix = CryptoNote.encode_varint(ExplorerConfig.addressPrefix)
-    var prefix = decodedAddress.slice(0, encodedPrefix.length)
-
-    if (prefix !== encodedPrefix) {
+    var address = CryptoNote.decode_address(recipient, ExplorerConfig.addressPrefix)
+    if (!address) {
       setRecipientAddressState(true)
       return
     }
-
-    decodedAddress = decodedAddress.slice(encodedPrefix.length)
-
-    /* This usually means that we have an integrated address on our hands */
-    if (decodedAddress.length > 136) {
-      var paymentId = decodedAddress.slice(0, 128)
-      decodedAddress = decodedAddress.slice(128)
-    } else {
-      var paymentId = ''
-    }
-
-    var publicSpend = decodedAddress.slice(0, 64)
-    var publicView = decodedAddress.slice(64, 128)
-    var checksum = decodedAddress.slice(-8)
-
-    if (paymentId.length === 0) {
-      var expectedChecksum = CryptoNote.cn_fast_hash(prefix + publicSpend + publicView).slice(0, 8)
-    } else {
-      var expectedChecksum = CryptoNote.cn_fast_hash(prefix + paymentId + publicSpend + publicView).slice(0, 8)
-      paymentId = Base58.hextostr(paymentId)
-    }
-
-    if (expectedChecksum !== checksum) {
-      throw 'Could not parse address'
-    }
-
-
   } catch (e) {
     setRecipientAddressState(true)
     return
@@ -183,18 +153,15 @@ function checkTransaction() {
   var totalOwned = 0
   localData.outputs.rows().every(function (idx, tableLoop, rowLoop) {
     var data = this.data()
-    var owned = checkOutput(txnPublicKey, privateViewKey, publicSpend, {
+    var owned = checkOutput(txnPublicKey, privateViewKey, address.publicSpendKey, {
       index: idx,
       key: data[1]
     })
-    console.log(owned)
     if (owned) {
       totalOwned = totalOwned + parseInt(data[0])
       $(localData.outputs.row(idx).nodes()).addClass('is-ours')
     }
   })
-
-  console.log(totalOwned)
 
   $('#ourAmount').text(': Found ' + numeral(totalOwned / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
 }
