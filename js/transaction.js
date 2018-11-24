@@ -41,8 +41,8 @@ $(document).ready(function () {
       $('#transactionNonce').text(txn.tx.nonce)
       $('#transactionUnlockTime').text(txn.tx.unlock_time)
       $('#transactionPublicKey').text(txn.tx.publicKey)
-      $('#inputCount').attr("data-badge", txn.tx.inputs.length)
-      $('#outputCount').attr("data-badge", txn.tx.outputs.length)
+      $('#inputCount').text(txn.tx.inputs.length)
+      $('#outputCount').text(txn.tx.outputs.length)
 
       const inputs = $('#inputs').DataTable({
         columnDefs: [{

@@ -11,7 +11,8 @@ $(document).ready(function () {
     type: 'GET',
     cache: 'false',
     success: function (list) {
-      $('#headerPaymentId').text(id).attr("data-badge", list.length)
+      $('#headerPaymentId').text(id)
+      $('#txnCount').text(list.length)
 
       const transactions = $('#paymentIdTransactions').DataTable({
         columnDefs: [{

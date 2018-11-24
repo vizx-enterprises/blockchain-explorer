@@ -146,7 +146,7 @@ function updateTransactionPool(table) {
     type: 'GET',
     cache: 'false',
     success: function (data) {
-      $("#transactionPoolCount").attr("data-badge", data.length)
+      $("#transactionPoolCount").text(data.length)
       table.clear()
       for (var i = 0; i < data.length; i++) {
         var txn = data[i]

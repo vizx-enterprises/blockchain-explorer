@@ -22,7 +22,7 @@ $(document).ready(function () {
       $('#blockReward').text(numeral(block.reward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
       $('#blockTransactionSize').text(numeral(block.transactionsCumulativeSize).format('0,0') + ' bytes')
       $('#blockTransactionFees').text(numeral(block.totalFeeAmount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
-      $('#transactionCount').attr("data-badge", block.transactions.length)
+      $('#transactionCount').text(block.transactions.length)
 
       const transactions = $('#transactions').DataTable({
         columnDefs: [{
