@@ -113,7 +113,7 @@ $(document).ready(function () {
 
 function getAndDisplayLastBlockHeader() {
   $.ajax({
-    url: ExplorerConfig.apiBaseUrl + '/block/header/top?random=' + (new Date()).getTime(),
+    url: ExplorerConfig.apiBaseUrl + '/block/header/top',
     dataType: 'json',
     type: 'GET',
     cache: 'false',
@@ -141,7 +141,7 @@ function getAndDisplayLastBlockHeader() {
 
 function updateTransactionPool(table) {
   $.ajax({
-    url: ExplorerConfig.apiBaseUrl + '/transaction/pool?random=' + (new Date()).getTime(),
+    url: ExplorerConfig.apiBaseUrl + '/transaction/pool',
     dataType: 'json',
     type: 'GET',
     cache: 'false',
@@ -164,7 +164,7 @@ function updateTransactionPool(table) {
 
 function updateRecentBlocks(table, height) {
   $.ajax({
-    url: ExplorerConfig.apiBaseUrl + '/block/headers/' + height + '?random=' + (new Date()).getTime(),
+    url: ExplorerConfig.apiBaseUrl + '/block/headers/' + height,
     dataType: 'json',
     type: 'GET',
     cache: 'false',
