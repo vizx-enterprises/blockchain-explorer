@@ -14,6 +14,11 @@ $(document).ready(function () {
       searchForTerm($('#searchValue').val())
     }
   })
+
+  $(".navbar-burger").click(function () {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
 })
 
 function isHash(str) {
