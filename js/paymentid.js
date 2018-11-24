@@ -76,7 +76,7 @@ $(document).ready(function () {
           txn.fee,
           txn.size,
           txn.mixin,
-          txn.hash          
+          txn.hash
         ])
       }
       transactions.draw(false)

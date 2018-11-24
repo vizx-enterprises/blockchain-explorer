@@ -57,7 +57,7 @@ $(document).ready(function () {
     autoWidth: false
   }).columns.adjust().responsive.recalc().draw(false)
 
-  google.charts.setOnLoadCallback(function() {
+  google.charts.setOnLoadCallback(function () {
     $.ajax({
       url: ExplorerConfig.poolListUrl,
       dataType: 'json',

@@ -88,7 +88,7 @@ $(document).ready(function () {
     autoWidth: false
   }).columns.adjust().responsive.recalc()
 
-  google.charts.setOnLoadCallback(function() {
+  google.charts.setOnLoadCallback(function () {
     getAndDisplayLastBlockHeader()
 
     function setLastBlockTimer() {
