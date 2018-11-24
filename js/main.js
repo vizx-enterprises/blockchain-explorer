@@ -51,8 +51,7 @@ $(document).ready(function () {
       },
       2: {
         logScale: true
-      }
-      ,
+      },
       3: {
         logScale: true
       }
@@ -207,7 +206,7 @@ function updateRecentBlocks(table, height) {
       for (var i = 0; i < data.length; i++) {
         var block = data[i]
         chartData.push(
-          [(new Date(block.timestamp * 1000)), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
+          [(new Date(block.timestamp * 1000 + ((new Date()).getTimezoneOffset() * 60 * 1000))), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
         )
         table.row.add([
           numeral(block.height).format('0,0'),
