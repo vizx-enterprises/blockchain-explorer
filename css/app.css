@@ -73,6 +73,10 @@ footer {
   width: 100%;
 }
 
+#globalHashRate {
+  font-weight: bold;
+}
+
 .dataTables_wrapper {
   width: 100% !important;
 }
