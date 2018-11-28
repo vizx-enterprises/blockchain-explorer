@@ -1,5 +1,3 @@
-# TurtlePay™ Blockchain Explorer
-
-This is a work in progress...
+# TurtleCoin Blockchain Explorer
 
 ###### (c) 2018 TurtlePay™ Development Team
