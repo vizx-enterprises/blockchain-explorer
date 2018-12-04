@@ -52,6 +52,8 @@ function getCurrentNetworkHashRateLoop() {
 
 function searchForTerm(term) {
   term = term.trim()
+    /* Allow commas in a height search */
+  term = term.replace(',', '')
   if (parseInt(term).toString() === term) {
     /* This should be height so we know to perform a search on height */
     $.ajax({
