@@ -158,6 +158,18 @@ function getAndDisplayLastBlockHeader() {
       $('#blockchainCirculatingSupply').text(numeral(data.alreadyGeneratedCoins / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
       $('#blockchainTotalSupply').text(numeral(ExplorerConfig.maxSupply / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
 
+      var nextFork
+      for (var i = ExplorerConfig.forkHeights.length; i > 0; i--) {
+        if (data.height >= ExplorerConfig.forkHeights[i]) {
+          nextFork = ExplorerConfig.forkHeights[i + 1]
+          break
+        }
+      }
+      var forkInSeconds = (nextFork - data.height) * ExplorerConfig.blockTargetTime
+      var forkTime = secondsToHumanReadable(forkInSeconds)
+      var estimatedFork = (Math.floor(Date.now() / 1000) + forkInSeconds)
+      $('#nextForkIn').text(forkTime.days + 'd ' + forkTime.hours + 'h ' + forkTime.minutes + 'm ' + forkTime.seconds + 's').prop('title', (new Date(estimatedFork * 1000)).toGMTString())
+
       const maxSupply = ExplorerConfig.maxSupply
       const curSupply = data.alreadyGeneratedCoins
       const emiss = (curSupply / maxSupply) * 100

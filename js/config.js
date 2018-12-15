@@ -6,5 +6,19 @@ const ExplorerConfig = {
   maxSupply: 100000000000000,
   decimalPoints: 2,
   blockTargetTime: 30,
-  addressPrefix: 3914525
+  addressPrefix: 3914525,
+  forkHeights: [
+    187000,
+    350000,
+    440000,
+    620000,
+    700000,
+    800000,
+    1000000,
+    1200000,
+    1400000,
+    1600000,
+    1800000,
+    2000000,
+  ]
 }

@@ -52,7 +52,7 @@ function getCurrentNetworkHashRateLoop() {
 
 function searchForTerm(term) {
   term = term.trim()
-    /* Allow commas in a height search */
+  /* Allow commas in a height search */
   term = term.replace(',', '')
   if (parseInt(term).toString() === term) {
     /* This should be height so we know to perform a search on height */
@@ -137,5 +137,21 @@ function getQueryStringParam(key) {
     if (param[0] === key) {
       return param[1]
     }
+  }
+}
+
+function secondsToHumanReadable(seconds) {
+  var days = Math.floor(seconds / (3600 * 24));
+  seconds -= days * 3600 * 24;
+  var hrs = Math.floor(seconds / 3600);
+  seconds -= hrs * 3600;
+  var mnts = Math.floor(seconds / 60);
+  seconds -= mnts * 60;
+
+  return {
+    days: days,
+    hours: hrs,
+    minutes: mnts,
+    seconds: seconds
   }
 }
