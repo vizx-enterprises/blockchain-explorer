@@ -8,7 +8,7 @@ $(document).ready(function () {
       emptyTable: "No Mixable Amounts Found"
     },
     columnDefs: [{
-        targets: [2],
+        targets: [3],
         type: 'num-fmt',
         render: function (data, type, row, meta) {
           if (type === 'display') {
@@ -28,6 +28,15 @@ $(document).ready(function () {
         }
       },
       {
+        targets: [1],
+        render: function (data, type, row, meta) {
+          if (type === 'display') {
+            data = numeral(data).format('0,0')
+          }
+          return data
+        }
+      },
+      {
         targets: [0],
         render: function (data, type, row, meta) {
           if (type === 'display') {
@@ -37,7 +46,7 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [1],
+        targets: [2],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             if (data === null) {
@@ -50,7 +59,7 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [3],
+        targets: [4],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             if (data !== null) {
@@ -84,6 +93,7 @@ function getMixableAmounts() {
         var denomination = data[i]
         localData.mixableAmounts.row.add([
           denomination.amount,
+          denomination.outputs,
           denomination.timestamp,
           {
             height: denomination.height,
