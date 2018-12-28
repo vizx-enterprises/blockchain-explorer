@@ -5,7 +5,7 @@ $(document).ready(function () {
     paging: false,
     lengthMenu: -1,
     language: {
-      emptyTable: "No Mixable Amounts Found"
+      emptyTable: "Loading mixable amounts... Please wait..."
     },
     columnDefs: [{
         targets: [3],
