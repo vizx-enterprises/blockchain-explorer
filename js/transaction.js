@@ -36,8 +36,10 @@ $(document).ready(function () {
       $('#transactionSize').text(numeral(txn.tx.size).format('0,0') + ' bytes')
       $('#transactionRingSize').text(numeral(txn.tx.mixin).format('0,0'))
       $('#transactionAmount').text(numeral(txn.tx.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
-      $('#transactionPaymentId').text(txn.tx.paymentId)
-      $('#blockHash').text(txn.block.hash)
+      if (txn.tx.paymentId.length !== 0) {
+        $('#transactionPaymentId').html('<a href="/paymentid.html?id=' + txn.tx.paymentId + '">' + txn.tx.paymentId + '</a>')
+      }
+      $('#blockHash').html('<a href="/block.html?hash=' + txn.block.hash + '">' + txn.block.hash + '</a>')
       $('#transactionNonce').text(txn.tx.nonce)
       $('#transactionUnlockTime').text(txn.tx.unlock_time)
       $('#transactionPublicKey').text(txn.tx.publicKey)
