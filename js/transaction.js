@@ -130,14 +130,14 @@ $(document).ready(function () {
 
 function checkTransaction() {
   var recipient = $('#recipientAddress').val()
-  var privateViewKey = $('#privateViewKey').val()
+  var key = $('#key').val()
   var txnPublicKey = $('#transactionPublicKey').text()
 
   localData.outputs.rows().every(function (idx, tableLoop, rowLoop) {
     $(localData.outputs.row(idx).nodes()).removeClass('is-ours')
   })
 
-  if (!isHash(privateViewKey)) {
+  if (!isHash(key)) {
     setPrivateViewKeyState(true)
   }
 
@@ -155,7 +155,7 @@ function checkTransaction() {
   var totalOwned = 0
   localData.outputs.rows().every(function (idx, tableLoop, rowLoop) {
     var data = this.data()
-    var owned = checkOutput(txnPublicKey, privateViewKey, address.publicSpendKey, {
+    var owned = checkOutput(txnPublicKey, key, address, {
       index: idx,
       key: data[1]
     })
@@ -168,11 +168,14 @@ function checkTransaction() {
   $('#ourAmount').text(': Found ' + numeral(totalOwned / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
 }
 
-function checkOutput(transactionPublicKey, privateViewKey, publicSpendKey, output) {
-  var derivedKey = CryptoNote.generate_key_derivation(transactionPublicKey, privateViewKey)
-  var derivedPublicKey = CryptoNote.derive_public_key(derivedKey, output.index, publicSpendKey)
+function checkOutput(transactionPublicKey, key, address, output) {
+  const derivedKeyFromTxnPubKey = CryptoNote.generate_key_derivation(transactionPublicKey, key)
+  const derivedKeyFromTxnPrivKey = CryptoNote.generate_key_derivation(address.publicViewKey, key)
 
-  return output.key === derivedPublicKey
+  const derivedPublicKeyFromTxnPubKey = CryptoNote.derive_public_key(derivedKeyFromTxnPubKey, output.index, address.publicSpendKey)
+  const derivedPublicKeyFromTxnPrivKey = CryptoNote.derive_public_key(derivedKeyFromTxnPrivKey, output.index, address.publicSpendKey)
+
+  return (output.key === derivedPublicKeyFromTxnPubKey || output.key === derivedPublicKeyFromTxnPrivKey)
 }
 
 function setPrivateViewKeyState(state) {
