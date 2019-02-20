@@ -64,7 +64,7 @@ $(document).ready(function () {
       transactions.draw(false)
     },
     error: function () {
-      window.location = '/'
+      window.location = '/?search=' + hash
     }
   })
 })

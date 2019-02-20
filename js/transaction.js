@@ -123,7 +123,7 @@ $(document).ready(function () {
       localData.outputs.draw(false)
     },
     error: function () {
-      window.location = '/'
+      window.location = '/?search=' + hash
     }
   })
 })
