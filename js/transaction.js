@@ -2,7 +2,7 @@ $(document).ready(function () {
   const hash = getQueryStringParam('hash')
 
   if (!isHash(hash)) {
-    return window.location = '/'
+    return window.location = '/?search=' + hash
   }
 
   $('#checkTransaction').click(function () {

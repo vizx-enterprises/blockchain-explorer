@@ -2,7 +2,7 @@ $(document).ready(function () {
   const id = getQueryStringParam('id')
 
   if (!isHash(id)) {
-    return window.location = '/'
+    return window.location = '/?search=' + id
   }
 
   $.ajax({
