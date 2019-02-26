@@ -24,7 +24,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/common.js"></script>
-    <script src="./js/pools.js"></script>
+    <script src="./js/charts.js"></script>
   </head>
   <body class="has-navbar-fixed-top">
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
@@ -41,10 +41,10 @@
       <div id="siteNavBar" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item" href="./"><i class="fas fa-dice-d6"></i>&nbsp; Block Explorer</a>
-          <a class="navbar-item is-active" href="./pools.html"><i class="fas fa-users"></i>&nbsp; Pools</a>
+          <a class="navbar-item" href="./pools.html"><i class="fas fa-users"></i>&nbsp; Pools</a>
           <a class="navbar-item" href="./tools.html"><i class="fas fa-toolbox"></i>&nbsp; Tools</a>
           <a class="navbar-item" href="./mixable.html"><i class="fas fa-mortar-pestle"></i>&nbsp; Mixable Amounts</a>
-          <a class="navbar-item" href="./charts.html"><i class="fas fa-chart-bar"></i>&nbsp; Network Charts</a>
+          <a class="navbar-item is-active" href="./charts.html"><i class="fas fa-chart-bar"></i>&nbsp; Network Charts</a>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -69,27 +69,29 @@
       <section class="section">
         <div class="container">
           <div class="panel">
-            <p class="panel-heading is-trtl-green"><i class="fas fa-dice-d6"></i>&nbsp; TurtleCoin Mining Pools - Network Hashrate: <span id="globalHashRate">&nbsp;</span></p>
+            <p class="panel-heading is-trtl-green"><i class="fas fa-chart-bar"></i>&nbsp; 24 Hour Difficulty</p>
             <div class="panel-block">
-              <table id="pools" class="table table-striped table-bordered is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>API</th>
-                    <th>Type</th>
-                    <th><i class="fas fa-users"></i>&nbsp; Pool Name</th>
-                    <th><i class="fas fa-bars"></i>&nbsp; Height</th>
-                    <th><i class="fas fa-tachometer-alt"></i>&nbsp; Hash Rate</th>
-                    <th><i class="fas fa-user"></i>&nbsp; Miners</th>
-                    <th><i class="fas fa-exchange-alt"></i>&nbsp; Pool Fee</th>
-                    <th><i class="fas fa-sign-out-alt"></i>&nbsp; Min. Payout</th>
-                    <th><i class="fas fa-clock"></i>&nbsp; Last Block Found</th>
-                  </tr>
-                </thead>
-              </table>
+              <div id="difficulty" class="chart">Loading...</div>
             </div>
           </div>
-          <div id="poolPieChart" class="chart">&nbsp;</div>
+          <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-chart-bar"></i>&nbsp; 24 Hour Block Size</p>
+            <div class="panel-block">
+              <div id="blockSize" class="chart">Loading...</div>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-chart-bar"></i>&nbsp; 24 Hour Transaction Count</p>
+            <div class="panel-block">
+              <div id="txnCount" class="chart">Loading...</div>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-chart-bar"></i>&nbsp; 24 Hour Nonce Value</p>
+            <div class="panel-block">
+              <div id="nonce" class="chart">Loading...</div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
