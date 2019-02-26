@@ -23,6 +23,8 @@ $(document).ready(function () {
     }
   })
 
+  window.cnUtils = new TurtleCoinUtils.CryptoNote()
+
   $.ajax({
     url: ExplorerConfig.apiBaseUrl + '/transaction/' + hash,
     dataType: 'json',
@@ -142,7 +144,7 @@ function checkTransaction() {
   }
 
   try {
-    var address = CryptoNote.decode_address(recipient, ExplorerConfig.addressPrefix)
+    var address = cnUtils.decodeAddress(recipient)
     if (!address) {
       setRecipientAddressState(true)
       return
@@ -169,13 +171,10 @@ function checkTransaction() {
 }
 
 function checkOutput(transactionPublicKey, key, address, output) {
-  const derivedKeyFromTxnPubKey = CryptoNote.generate_key_derivation(transactionPublicKey, key)
-  const derivedKeyFromTxnPrivKey = CryptoNote.generate_key_derivation(address.publicViewKey, key)
+  const isOursTxnPublicKey = cnUtils.isOurTransactionOutput(transactionPublicKey, output, key, address.publicSpendKey)
+  const isOursTxnPrivKey = cnUtils.isOurTransactionOutput(address.publicViewKey, output, key, address.publicSpendKey)
 
-  const derivedPublicKeyFromTxnPubKey = CryptoNote.derive_public_key(derivedKeyFromTxnPubKey, output.index, address.publicSpendKey)
-  const derivedPublicKeyFromTxnPrivKey = CryptoNote.derive_public_key(derivedKeyFromTxnPrivKey, output.index, address.publicSpendKey)
-
-  return (output.key === derivedPublicKeyFromTxnPubKey || output.key === derivedPublicKeyFromTxnPrivKey)
+  return (isOursTxnPublicKey || isOursTxnPrivKey)
 }
 
 function setPrivateViewKeyState(state) {

@@ -20,13 +20,15 @@ $(document).ready(function () {
   $('#paymentId').keydown(function () {
     encodeAddress()
   })
+
+  window.cnUtils = new TurtleCoinUtils.CryptoNote()
 })
 
 function decodeAddress() {
   var walletAddress = $('#walletAddress').val()
 
   try {
-    var addr = CryptoNote.decode_address(walletAddress, ExplorerConfig.addressPrefix)
+    var addr = cnUtils.decodeAddress(walletAddress)
     $('#publicViewKey').val(addr.publicViewKey)
     $('#publicSpendKey').val(addr.publicSpendKey)
     $('#paymentId').val(addr.paymentId)
@@ -60,7 +62,7 @@ function encodeAddress() {
   }
 
   try {
-    var addr = CryptoNote.encode_address(publicViewKey, publicSpendKey, ExplorerConfig.addressPrefix, paymentId)
+    var addr = cnUtils.encodeAddress(publicViewKey, publicSpendKey, paymentId)
     $('#encodedAddress').val(addr)
   } catch (e) {
     $('#encodedAddress').removeClass('is-danger').addClass('is-danger')
