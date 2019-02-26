@@ -27,6 +27,10 @@ $(document).ready(function () {
     encodeAddress()
   })
 
+  $('#generateRandomPaymentIDButton').click(function () {
+    generateRandomPaymentID()
+  })
+
   window.cnUtils = new TurtleCoinUtils.CryptoNote()
 })
 
@@ -124,4 +128,10 @@ function encodeAddress() {
   } catch (e) {
     $('#encodedAddress').removeClass('is-danger').addClass('is-danger')
   }
+}
+
+function generateRandomPaymentID() {
+  const random = cnUtils.createNewSeed((new Date()).toString()).toUpperCase()
+
+  $('#paymentId').val(random)
 }
