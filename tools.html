@@ -64,10 +64,104 @@
         </div>
       </div>
     </nav>
-
     <main>
       <section class="section">
         <div class="container">
+          <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-wallet"></i>&nbsp; Client Side Wallet Generator</p>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Random Entropy</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Type Some Random Characters Here" id="entropy">
+                </div>
+                <div class="control">
+                  <a class="button is-trtl-green is-fixed-width-150" id="generateWalletButton">Generate Wallet</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block has-text-centered has-text-weight-bold">
+              Fields in red must be kept secret! Do not share with others!
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-red is-fixed-width-150">Wallet Seed</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Wallet Seed" id="seed">
+                </div>
+                <div class="control">
+                  <a class="button is-trtl-green is-fixed-width-150" id="restoreFromSeedButton">Restore Wallet</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-red is-fixed-width-150">Mnemonic Words</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <textarea class="textarea is-fullwidth" rows="2" placeholder="Mnemonic Words" id="mnemonic"></textarea>
+                </div>
+                <div class="control">
+                  <a class="button is-trtl-green is-fixed-width-150" id="restoreFromMnemonicButton">Restore Wallet</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-red is-fixed-width-150">Private Spend Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Private Spend Key" id="newPrivateSpendKey" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Public Spend Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Public Spend Key" id="newPublicSpendKey" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-red is-fixed-width-150">Private View Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Private View Key" id="newPrivateViewKey" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Public View Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Public View key" id="newPublicViewKey" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <a class="button is-trtl-secondary-green is-fixed-width-150">Wallet Address</a>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Wallet Address" id="newWalletAddress" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="panel">
             <p class="panel-heading is-trtl-green"><i class="fas fa-user-secret"></i>&nbsp; Address Encoder / Decoder</p>
             <div class="panel-block">
@@ -76,7 +170,17 @@
                   <input class="input is-fullwidth" type="text" placeholder="Wallet Address" id="walletAddress">
                 </div>
                 <div class="control">
-                  <a class="button is-info is-trtl-green" id="decodeButton">Decode Address</a>
+                  <a class="button is-info is-trtl-green is-fixed-width-150" id="decodeButton">Decode Address</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Public Spend Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Public Spend Key" id="publicSpendKey">
                 </div>
               </div>
             </div>
@@ -90,18 +194,6 @@
                 </div>
               </div>
             </div>
-            
-            <div class="panel-block">
-              <div class="field has-addons is-really-fullwidth">
-                <div class="control">
-                  <span class="button is-trtl-black is-fixed-width-150">Public Spend Key</span>
-                </div>
-                <div class="control is-really-fullwidth">
-                  <input class="input is-fullwidth" type="text" placeholder="Public Spend Key" id="publicSpendKey">
-                </div>
-              </div>
-            </div>
-            
             <div class="panel-block">
               <div class="field has-addons is-really-fullwidth">
                 <div class="control">
@@ -112,7 +204,6 @@
                 </div>
               </div>
             </div>
-            
             <div class="panel-block">
               <div class="field has-addons is-really-fullwidth">
                 <div class="control">
@@ -121,14 +212,15 @@
                 <div class="control is-really-fullwidth">
                   <input class="input is-fullwidth" type="text" placeholder="Encoded Address" id="encodedAddress">
                 </div>
+                <div class="control">
+                  <a class="button is-trtl-green is-fixed-width-150" id="encodeAddressButton">Encode Address</a>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </section>
     </main>
-    
     <footer>
       <div class="content has-text-centered">
         <p>

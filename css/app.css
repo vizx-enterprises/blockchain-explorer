@@ -36,6 +36,11 @@ footer {
   color: #fff !important;
 }
 
+.is-trtl-red {
+  background-color: #de5f5f !important;
+  color: #fff !important;
+}
+
 .is-really-fullwidth {
   width: 100% !important;
 }
@@ -78,7 +83,9 @@ footer {
   font-family: "Lucida Console", Monaco, monospace;
 }
 
-#paymentIdTransactions_filter, #paymentIdTransactions_paginate, #paymentIdTransactions_length {
+#paymentIdTransactions_filter,
+#paymentIdTransactions_paginate,
+#paymentIdTransactions_length {
   font-size: 8pt !important;
 }
 
@@ -116,16 +123,26 @@ a {
   color: #00853d;
 }
 
-.navbar-link.is-active, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:hover {
+.navbar-link.is-active,
+.navbar-link:hover,
+a.navbar-item.is-active,
+a.navbar-item:hover {
   color: #00853d !important;
 }
 
-.trtl-amount, .trtl-fee, .trtl-type, .trtl-size, .trtl-txns, .trtl-datetime, .trtl-icon {
+.trtl-amount,
+.trtl-fee,
+.trtl-type,
+.trtl-size,
+.trtl-txns,
+.trtl-datetime,
+.trtl-icon {
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.trtl-amount, .trtl-fee {
+.trtl-amount,
+.trtl-fee {
   width: 175px;
 }
 
@@ -133,7 +150,8 @@ a {
   width: 100px;
 }
 
-.trtl-size, .trtl-txns {
+.trtl-size,
+.trtl-txns {
   width: 100px;
 }
 
