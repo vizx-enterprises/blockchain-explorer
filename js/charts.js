@@ -28,11 +28,17 @@ const blockchainChartOptions = {
   vAxes: {
     0: {
       logScale: true
+    },
+    1: {
+      logScale: true
     }
   },
   series: {
     0: {
       targetAxisIndex: 0
+    },
+    1: {
+      targetAxisIndex: 1
     }
   },
   colors: ['#f6b26b', '#40c18e', '#8e7cc3', '#00853d', '#212721', '#fac5c3', '#6d9eeb', '#45818e', '#de5f5f']
@@ -65,7 +71,7 @@ function updateCharts() {
       const nonceChart = new google.visualization.AreaChart(document.getElementById('nonce'))
 
       const difficultyData = [
-        ['Block Time', 'Difficulty']
+        ['Block Time', 'Difficulty', 'Hashrate']
       ]
 
       const blockSizeData = [
@@ -85,11 +91,12 @@ function updateCharts() {
         difficultyData.push([
           (new Date(block.timestamp * 1000 + ((new Date()).getTimezoneOffset() * 60 * 1000))),
           parseInt(block.difficulty),
+          parseInt(block.difficulty) / ExplorerConfig.blockTargetTime
         ])
 
         blockSizeData.push([
           (new Date(block.timestamp * 1000 + ((new Date()).getTimezoneOffset() * 60 * 1000))),
-          parseInt(block.size),
+          parseInt(block.size)
         ])
 
         txnData.push([
@@ -99,28 +106,28 @@ function updateCharts() {
 
         nonceData.push([
           (new Date(block.timestamp * 1000 + ((new Date()).getTimezoneOffset() * 60 * 1000))),
-          parseInt(block.nonce),
+          parseInt(block.nonce)
         ])
       }
 
       const difficultyChartData = google.visualization.arrayToDataTable(difficultyData)
       const difficultyChartOptions = blockchainChartOptions
-      difficultyChartOptions.colors = ['#f6b26b']
+      difficultyChartOptions.colors = ['#f6b26b','#40c18e']
       difficultyChart.draw(difficultyChartData, difficultyChartOptions)
 
       const blockSizeChartData = google.visualization.arrayToDataTable(blockSizeData)
       const blockSizeChartOptions = blockchainChartOptions
-      blockSizeChartOptions.colors = ['#40c18e']
+      blockSizeChartOptions.colors = ['#8e7cc3']
       blockSizeChart.draw(blockSizeChartData, blockSizeChartOptions)
 
       const txnChartData = google.visualization.arrayToDataTable(txnData)
       const txnChartOptions = blockchainChartOptions
-      txnChartOptions.colors = ['#8e7cc3']
+      txnChartOptions.colors = ['#00853d']
       txnChart.draw(txnChartData, txnChartOptions)
 
       const nonceChartData = google.visualization.arrayToDataTable(nonceData)
       const nonceChartOptions = blockchainChartOptions
-      nonceChartOptions.colors = ['#00853d']
+      nonceChartOptions.colors = ['#212721']
       nonceChart.draw(nonceChartData, nonceChartOptions)
     }
   })
