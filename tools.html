@@ -23,6 +23,7 @@
     <script src="./js/third-party.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/common.js"></script>
+    <script src="./js/cryptonote.min.js"></script>
     <script src="./js/tools.js"></script>
   </head>
   <body class="has-navbar-fixed-top">
@@ -68,8 +69,62 @@
       <section class="section">
         <div class="container">
           <div class="panel">
+            <p class="panel-heading is-trtl-green"><i class="fas fa-user-secret"></i>&nbsp; Address Encoder / Decoder</p>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Wallet Address" id="walletAddress">
+                </div>
+                <div class="control">
+                  <a class="button is-info is-trtl-green" id="decodeButton">Decode Address</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Public View Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Public View Key" id="publicViewKey">
+                </div>
+              </div>
+            </div>
             
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Public Spend Key</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Public Spend Key" id="publicSpendKey">
+                </div>
+              </div>
+            </div>
+            
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <span class="button is-trtl-black is-fixed-width-150">Payment ID</span>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Payment ID" id="paymentId">
+                </div>
+              </div>
+            </div>
+            
+            <div class="panel-block">
+              <div class="field has-addons is-really-fullwidth">
+                <div class="control">
+                  <a class="button is-trtl-secondary-green is-fixed-width-150">Encoded Address</a>
+                </div>
+                <div class="control is-really-fullwidth">
+                  <input class="input is-fullwidth" type="text" placeholder="Encoded Address" id="encodedAddress">
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>

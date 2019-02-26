@@ -31,6 +31,19 @@ footer {
   color: #fff !important;
 }
 
+.is-trtl-secondary-green {
+  background-color: #40c18e !important;
+  color: #fff !important;
+}
+
+.is-really-fullwidth {
+  width: 100% !important;
+}
+
+.is-fixed-width-150 {
+  width: 150px !important;
+}
+
 .navbar-item {
   font-weight: bold !important;
 }
