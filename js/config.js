@@ -4,8 +4,13 @@ const ExplorerConfig = {
   poolListUrl: 'https://raw.githubusercontent.com/turtlecoin/turtlecoin-pools-json/master/v2/turtlecoin-pools.json',
   ticker: 'TRTL',
   maxSupply: 100000000000000,
+  emissionSpeed: 25,
   decimalPoints: 2,
   blockTargetTime: 30,
+  startYear: 2017,
+  genesisTimestamp: 1512800692,
+  emissionCurveInterval: 20000,
+  emissionCurveDataPoints: 15000,
   addressPrefix: 3914525,
   forkHeights: [
     187000,

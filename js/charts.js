@@ -45,7 +45,6 @@ const blockchainChartOptions = {
 }
 
 $(document).ready(function () {
-
   google.charts.setOnLoadCallback(function () {
     function setUpdateTimer() {
       updateCharts()
