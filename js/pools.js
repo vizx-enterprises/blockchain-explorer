@@ -33,7 +33,7 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [8],
+        targets: [9],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker
@@ -42,7 +42,7 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [9],
+        targets: [10],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             data = (new Date(data)).toGMTString()
@@ -83,6 +83,7 @@ function getAndDrawPoolStats() {
           },
           numeral(pool.height).format('0,0'),
           pool.hashrate,
+          (pool.mergedMining) ? ((pool.mergedMiningIsParentChain) ? 'Parent' : 'Child') : 'No',
           numeral(pool.miners).format('0,0'),
           numeral(pool.fee).format('0,0.00') + '%',
           pool.minPayout,
