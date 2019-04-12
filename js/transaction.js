@@ -23,7 +23,10 @@ $(document).ready(function () {
     }
   })
 
-  window.cnUtils = new TurtleCoinUtils.CryptoNote()
+  window.cnUtils = new TurtleCoinUtils.CryptoNote({
+    coinUnitPlaces: ExplorerConfig.decimalPoints,
+    addressPrefix: ExplorerConfig.addressPrefix
+  })
 
   $.ajax({
     url: ExplorerConfig.apiBaseUrl + '/transaction/' + hash,

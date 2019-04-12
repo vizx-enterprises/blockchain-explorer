@@ -31,7 +31,10 @@ $(document).ready(function () {
     generateRandomPaymentID()
   })
 
-  window.cnUtils = new TurtleCoinUtils.CryptoNote()
+  window.cnUtils = new TurtleCoinUtils.CryptoNote({
+    coinUnitPlaces: ExplorerConfig.decimalPoints,
+    addressPrefix: ExplorerConfig.addressPrefix
+  })
 })
 
 function generateWallet(newWallet) {
