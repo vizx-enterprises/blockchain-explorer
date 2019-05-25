@@ -27,10 +27,10 @@ const blockchainChartOptions = {
   },
   vAxes: {
     0: {
-      logScale: true
+      logScale: false
     },
     1: {
-      logScale: true
+      logScale: false
     }
   },
   series: {
