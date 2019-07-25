@@ -83,6 +83,10 @@ footer {
   font-family: "Lucida Console", Monaco, monospace;
 }
 
+#transactionNonce {
+  word-wrap: break-word;
+}
+
 #paymentIdTransactions_filter,
 #paymentIdTransactions_paginate,
 #paymentIdTransactions_length {

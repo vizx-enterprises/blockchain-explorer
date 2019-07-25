@@ -44,9 +44,10 @@ $(document).ready(function () {
       if (txn.tx.paymentId.length !== 0) {
         $('#transactionPaymentId').html('<a href="/paymentid.html?id=' + txn.tx.paymentId + '">' + txn.tx.paymentId + '</a>')
       }
+      $('#blockHeight').html('<a href="/?search=' + txn.block.height + '">' + numeral(txn.block.height).format('0,0') + '</a>')
       $('#blockHash').html('<a href="/block.html?hash=' + txn.block.hash + '">' + txn.block.hash + '</a>')
       $('#transactionNonce').text(txn.tx.nonce)
-      $('#transactionUnlockTime').text(txn.tx.unlock_time)
+      $('#transactionUnlockTime').text(numeral(txn.tx.unlock_time).format('0,0'))
       $('#transactionPublicKey').text(txn.tx.publicKey)
       $('#inputCount').text(txn.tx.inputs.length)
       $('#outputCount').text(txn.tx.outputs.length)
