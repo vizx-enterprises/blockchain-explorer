@@ -22,10 +22,10 @@
     <link rel="stylesheet" href="./css/app.css">
     <script src="./js/third-party.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.42/BigInteger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jdenticon@2.2.0" async></script>
     <script src="./js/config.js"></script>
     <script src="./js/common.js"></script>
-    <script src="./js/supply.js"></script>
+    <script src="./js/nodes.js"></script>
   </head>
   <body class="has-navbar-fixed-top">
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
@@ -42,12 +42,12 @@
       <div id="siteNavBar" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item" href="./"><i class="fas fa-dice-d6"></i>&nbsp; Block Explorer</a>
-          <a class="navbar-item" href="./nodes.html"><i class="fas fa-server"></i>&nbsp; Nodes</a>
+          <a class="navbar-item is-active" href="./nodes.html"><i class="fas fa-server"></i>&nbsp; Nodes</a>
           <a class="navbar-item" href="./pools.html"><i class="fas fa-users"></i>&nbsp; Pools</a>
           <a class="navbar-item" href="./tools.html"><i class="fas fa-toolbox"></i>&nbsp; Tools</a>
           <a class="navbar-item" href="./mixable.html"><i class="fas fa-mortar-pestle"></i>&nbsp; Mixable Amounts</a>
           <a class="navbar-item" href="./charts.html"><i class="fas fa-chart-bar"></i>&nbsp; Network Charts</a>
-          <a class="navbar-item is-active" href="./supply.html"><i class="fas fa-money-bill-wave-alt"></i>&nbsp; Currency Supply</a>
+          <a class="navbar-item" href="./supply.html"><i class="fas fa-money-bill-wave-alt"></i>&nbsp; Currency Supply</a>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -72,17 +72,24 @@
       <section class="section">
         <div class="container">
           <div class="panel">
-            <p class="panel-heading is-trtl-green"><i class="fas fa-money-bill-wave-alt"></i>&nbsp; Currency Supply & Emission</p>
+            <p class="panel-heading is-trtl-green"><i class="fas fa-server"></i>&nbsp; TurtleCoin Community Nodes</span></p>
             <div class="panel-block">
-              <div id="supply" class="bigChart">Loading...</div>
-            </div>
-            <div></div>
-            <div class="content has-text-centered">
-              <p></p>
-              <p>Want to learn more about the TurtleCoin currency supply?</p>
-              <p>Check out the medium article <a href="https://medium.com/@turtlecoin/one-trillion-turtles-coin-supply-and-unit-economics-5bfbea0aa1f1">One Trillion Turtles: Coin Supply and Unit Economics</a></p>
+              <table id="nodes" class="table table-striped table-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th><i class="fas fa-id-badge"></i>&nbsp; Node Name</th>
+                    <th><i class="fas fa-plug"></i>&nbsp; Hostname:Port</th>
+                    <th><i class="fas fa-exchange-alt"></i>&nbsp; Fee</th>
+                    <th><i class="fas fa-code-branch"></i>&nbsp; Version</th>
+                    <th><i class="fas fa-layer-group"></i>&nbsp; Height</th>
+                    <th><i class="fas fa-link"></i>&nbsp; In/Out</th>
+                    <th><i class="fas fa-history"></i>&nbsp; History</th>
+                  </tr>
+                </thead>
+              </table>
             </div>
           </div>
+          <div class="has-text-centered">Node checks are performed approximately once every two (2) minutes.</div>
         </div>
       </section>
     </main>
