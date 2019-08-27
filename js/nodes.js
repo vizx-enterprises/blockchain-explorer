@@ -107,8 +107,8 @@ function getAndDrawNodeStats () {
           {
             host: node.url,
             port: node.port,
-            ssl: (node.ssl) ? ' <i class="fas fa-user-shield" title="SSL Supported"></i>' : '',
-            cache: (node.cache) ? ' <i class="fas fa-tachometer-alt" title="Blockchain Cache"></i>' : ''
+            ssl: (node.ssl) ? ' <i class="fas fa-user-shield has-trtl-green" title="SSL Supported"></i>' : '',
+            cache: (node.cache) ? ' <i class="fas fa-tachometer-alt has-trtl-green" title="Blockchain Cache"></i>' : ''
           },
           (node.version !== 'offline') ? node.fee.amount : '',
           (node.version !== 'offline') ? node.version : '',
