@@ -5,18 +5,14 @@ $(document).ready(function () {
     paging: false,
     lengthMenu: -1,
     language: {
-      emptyTable: "No Mining Pools Found"
+      emptyTable: 'No Mining Pools Found'
     },
-    columnDefs: [{
-        targets: [0, 1, 2],
-        visible: false,
-        search: false
-      },
+    columnDefs: [
       {
-        targets: [3],
+        targets: [0],
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = '<a href="' + data.url + '" target="_blank">' + data.name + '</a>'
+            data = '<a href="' + data.url + '" target="_blank">' + data.name + '</a> ' + data.merged + data.child
           } else if (type === 'sort') {
             data = data.name
           }
@@ -24,7 +20,7 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [5],
+        targets: [2],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             data = numeral(data).format('0,0') + ' H/s'
@@ -33,19 +29,31 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [9],
+        targets: [5],
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker
+            data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00')
           }
           return data
         }
       },
       {
-        targets: [10],
+        targets: [6],
         render: function (data, type, row, meta) {
           if (type === 'display') {
             data = (new Date(data)).toGMTString()
+          }
+          return data
+        }
+      },
+      {
+        targets: [7],
+        type: 'num',
+        render: function (data, type, row, meta) {
+          if (type === 'display') {
+            data = '<span title="' + data.percent + '%">' + data.hist + '</span>'
+          } else if (type === 'sort') {
+            data = data.percent
           }
           return data
         }
@@ -63,9 +71,9 @@ $(document).ready(function () {
   })
 })
 
-function getAndDrawPoolStats() {
+function getAndDrawPoolStats () {
   $.ajax({
-    url: ExplorerConfig.poolApiUrl,
+    url: ExplorerConfig.apiBaseUrl + '/pool/stats',
     dataType: 'json',
     method: 'GET',
     cache: 'true',
@@ -73,36 +81,50 @@ function getAndDrawPoolStats() {
       localData.poolTable.clear()
       for (var i = 0; i < data.length; i++) {
         var pool = data[i]
+
+        var hist = []
+
+        if (pool.history) {
+          for (var j = 0; j < pool.history.length; j++) {
+            var evt = pool.history[j]
+            if (evt.online) {
+              hist.unshift('<span class="has-trtl-green">●</span>')
+            } else {
+              hist.unshift('<span class="has-trtl-red">●</span>')
+            }
+          }
+        }
+
         localData.poolTable.row.add([
-          pool.name,
-          pool.api,
-          pool.type,
           {
             name: pool.name,
-            url: pool.url
+            url: pool.url,
+            merged: (pool.mergedMining) ? ' <i class="fas fa-object-group has-trtl-green" title="Merged Mining"></i>' : '',
+            child: (pool.mergedMining && !pool.mergedMiningIsParentChain) ? ' <i class="fas fa-child has-trtl-green" title="Child Chain"></i>' : ''
           },
           numeral(pool.height).format('0,0'),
           pool.hashrate,
-          (pool.mergedMining) ? ((pool.mergedMiningIsParentChain) ? 'Parent' : 'Child') : 'No',
           numeral(pool.miners).format('0,0'),
           numeral(pool.fee).format('0,0.00') + '%',
           pool.minPayout,
-          pool.lastblock
+          pool.lastBlock * 1000,
+          {
+            hist: hist.join(''),
+            percent: numeral(pool.availability).format('0,0.00')
+          }
         ])
       }
       localData.poolTable.draw(false)
       drawPoolPieChart()
     },
-    error: function () {
-      alert('Could not retrieve pool statistics from + ' + ExplorerConfig.poolApiUrl)
-    }
+    error: function () {}
   })
   setTimeout(() => {
     getAndDrawPoolStats()
   }, 15000)
 }
 
-function drawPoolPieChart() {
+function drawPoolPieChart () {
   var data = [
     ['Pool', 'Hashrate']
   ]
@@ -112,8 +134,8 @@ function drawPoolPieChart() {
   var currentHashRate = localData.networkHashRate
   localData.poolTable.rows().every(function (idx, tableLoop, rowLoop) {
     var row = this.data()
-    data.push([row[3].name, row[5]])
-    currentHashRate = currentHashRate - row[5]
+    data.push([row[0].name, row[2]])
+    currentHashRate = currentHashRate - row[2]
     slices[count] = {
       offset: 0
     }
