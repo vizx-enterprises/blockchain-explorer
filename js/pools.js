@@ -51,7 +51,7 @@ $(document).ready(function () {
         type: 'num',
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = '<span title="' + data.percent + '%">' + data.hist + '</span>'
+            data = '<span title="' + data.percent + '%" style="font-size: 0.8em;">' + data.hist + '</span>'
           } else if (type === 'sort') {
             data = data.percent
           }
@@ -88,9 +88,9 @@ function getAndDrawPoolStats () {
           for (var j = 0; j < pool.history.length; j++) {
             var evt = pool.history[j]
             if (evt.online) {
-              hist.unshift('<span class="has-trtl-green">●</span>')
+              hist.unshift('<i class="fas fa-circle has-trtl-green"></i>')
             } else {
-              hist.unshift('<span class="has-trtl-red">●</span>')
+              hist.unshift('<i class="far fa-circle has-trtl-red"></i>')
             }
           }
         }

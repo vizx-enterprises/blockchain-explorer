@@ -56,7 +56,7 @@ $(document).ready(function () {
         type: 'num',
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = '<span title="'+data.percent+'%">' + data.hist + '</span>'
+            data = '<span title="'+data.percent+'%" style="font-size: 0.8em;">' + data.hist + '</span>'
           } else if (type === 'sort') {
             data = data.percent
           }
@@ -92,9 +92,9 @@ function getAndDrawNodeStats () {
           for (var j = 0; j < node.history.length; j++) {
             var evt = node.history[j]
             if (evt.online) {
-              hist.unshift('<span class="has-trtl-green">●</span>')
+              hist.unshift('<i class="fas fa-circle has-trtl-green"></i>')
             } else {
-              hist.unshift('<span class="has-trtl-red">●</span>')
+              hist.unshift('<i class="far fa-circle has-trtl-red"></i>')
             }
           }
         }
@@ -107,7 +107,7 @@ function getAndDrawNodeStats () {
           {
             host: node.url,
             port: node.port,
-            ssl: (node.ssl) ? ' <i class="fas fa-user-shield has-trtl-green" title="SSL Supported"></i>' : '',
+            ssl: (node.ssl) ? ' <i class="fas fa-user-shield has-trtl-green" title="SSL Required"></i>' : '',
             cache: (node.cache) ? ' <i class="fas fa-tachometer-alt has-trtl-green" title="Blockchain Cache"></i>' : ''
           },
           (node.version !== 'offline') ? node.fee.amount : '',
