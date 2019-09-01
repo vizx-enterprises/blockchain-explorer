@@ -76,7 +76,7 @@ function getAndDrawPoolStats () {
     url: ExplorerConfig.apiBaseUrl + '/pool/stats',
     dataType: 'json',
     method: 'GET',
-    cache: 'true',
+    cache: 'false',
     success: function (data) {
       localData.poolTable.clear()
       for (var i = 0; i < data.length; i++) {

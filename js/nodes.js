@@ -81,7 +81,7 @@ function getAndDrawNodeStats () {
     url: ExplorerConfig.apiBaseUrl + '/node/stats',
     dataType: 'json',
     method: 'GET',
-    cache: 'true',
+    cache: 'false',
     success: function (data) {
       localData.nodeTable.clear()
       for (var i = 0; i < data.length; i++) {
