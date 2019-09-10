@@ -7,13 +7,7 @@ $(window).resize(function () {
 })
 
 $(document).ready(function () {
-  const searchTerm = getQueryStringParam('search')
-  /* If we were given a search term, let's plug it in
-     and then run a search for them */
-  if (searchTerm && searchTerm.length !== 0) {
-    $('#searchValue').val(searchTerm)
-    searchForTerm(searchTerm)
-  }
+  checkForSearchTerm()
 
   blockchainChartOptions = {
     legend: {
@@ -73,7 +67,7 @@ $(document).ready(function () {
     colors: ['#f6b26b', '#40c18e', '#8e7cc3', '#00853d', '#212721', '#fac5c3', '#6d9eeb', '#45818e', '#de5f5f']
   }
 
-  const transactionPool = $('#transactionPool').DataTable({
+  localData.transactionPool = $('#transactionPool').DataTable({
     columnDefs: [{
       targets: [0, 1, 2, 3],
       searchable: false
@@ -127,11 +121,11 @@ $(document).ready(function () {
     }
     setLastBlockTimer()
 
-    updateTransactionPool(transactionPool)
+    updateTransactionPool(localData.transactionPool)
 
     function setTransactionPoolTimer() {
       setTimeout(function () {
-        updateTransactionPool(transactionPool)
+        updateTransactionPool(localData.transactionPool)
         setTransactionPoolTimer()
       }, 15000)
     }
@@ -198,6 +192,8 @@ function updateTransactionPool(table) {
         ])
       }
       table.draw(false)
+      
+      checkForSearchTerm()
     }
   })
 }

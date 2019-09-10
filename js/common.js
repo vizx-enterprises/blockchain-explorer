@@ -18,18 +18,47 @@ $(document).ready(function () {
     }
   })
 
-  $(".navbar-burger").click(function () {
-    $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
-  });
+  $('.navbar-burger').click(function () {
+    $('.navbar-burger').toggleClass('is-active')
+    $('.navbar-menu').toggleClass('is-active')
+  })
 })
 
-function isHash(str) {
+function checkForSearchTerm () {
+  const searchTerm = getQueryStringParam('search')
+  /* If we were given a search term, let's plug it in
+     and then run a search for them */
+  if (searchTerm && searchTerm.length !== 0) {
+    $('#searchValue').val(searchTerm)
+    searchForTerm(searchTerm)
+  }
+}
+
+function searchTransactionPool (term) {
+  var found = false
+  if (localData.transactionPool) {
+    /* Clear any highlights */
+    localData.transactionPool.rows().every(function (idx, tableLoop, rowLoop) {
+      $(localData.transactionPool.row(idx).nodes()).removeClass('is-ours')
+    })
+
+    localData.transactionPool.rows().every(function (idx, tableLoop, rowLoop) {
+      if (localData.transactionPool.row(idx).data()[3] === term) {
+        $(localData.transactionPool.row(idx).nodes()).addClass('is-ours')
+        found = true
+      }
+    })
+  }
+
+  return found
+}
+
+function isHash (str) {
   const regex = new RegExp('^[0-9a-fA-F]{64}$')
   return regex.test(str)
 }
 
-function getCurrentNetworkHashRateLoop() {
+function getCurrentNetworkHashRateLoop () {
   $.ajax({
     url: ExplorerConfig.apiBaseUrl + '/block/header/top',
     dataType: 'json',
@@ -50,10 +79,11 @@ function getCurrentNetworkHashRateLoop() {
   })
 }
 
-function searchForTerm(term) {
+function searchForTerm (term) {
   term = term.trim()
   /* Allow commas in a height search */
   term = term.replace(',', '')
+
   if (parseInt(term).toString() === term) {
     /* This should be height so we know to perform a search on height */
     $.ajax({
@@ -104,12 +134,15 @@ function searchForTerm(term) {
                   /* It's a payment Id, let's display the list */
                   window.location = '/paymentid.html?id=' + term
                 } else {
-                  setSearchValueErrorState(true)
+                  if (!searchTransactionPool(term)) {
+                    setSearchValueErrorState(true)
+                  }
                 }
               },
               error: function () {
-                /* We don't know what this is... */
-                setSearchValueErrorState(true)
+                if (!searchTransactionPool(term)) {
+                  setSearchValueErrorState(true)
+                }
               }
             })
           }
@@ -121,7 +154,7 @@ function searchForTerm(term) {
   }
 }
 
-function setSearchValueErrorState(state) {
+function setSearchValueErrorState (state) {
   if (state) {
     $('#searchValue').removeClass('is-danger').addClass('is-danger')
   } else {
@@ -129,7 +162,7 @@ function setSearchValueErrorState(state) {
   }
 }
 
-function getQueryStringParam(key) {
+function getQueryStringParam (key) {
   const queryString = window.location.search.substring(1)
   const params = queryString.split('&')
   for (var i = 0; i < params.length; i++) {
@@ -140,13 +173,13 @@ function getQueryStringParam(key) {
   }
 }
 
-function secondsToHumanReadable(seconds) {
-  var days = Math.floor(seconds / (3600 * 24));
-  seconds -= days * 3600 * 24;
-  var hrs = Math.floor(seconds / 3600);
-  seconds -= hrs * 3600;
-  var mnts = Math.floor(seconds / 60);
-  seconds -= mnts * 60;
+function secondsToHumanReadable (seconds) {
+  var days = Math.floor(seconds / (3600 * 24))
+  seconds -= days * 3600 * 24
+  var hrs = Math.floor(seconds / 3600)
+  seconds -= hrs * 3600
+  var mnts = Math.floor(seconds / 60)
+  seconds -= mnts * 60
 
   return {
     days: days,
