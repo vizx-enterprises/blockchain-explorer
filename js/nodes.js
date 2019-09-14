@@ -109,7 +109,7 @@ function getAndDrawNodeStats () {
           (node.version !== 'offline') ? node.version : '',
           (node.version !== 'offline') ? numeral(node.height).format('0,0') : '',
           {
-            offline: (node.version === 'offline'),
+            offline: !(node.version !== 'offline'),
             ins: node.connectionsIn,
             outs: node.connectionsOut
           },
