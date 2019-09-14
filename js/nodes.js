@@ -5,7 +5,7 @@ $(document).ready(function () {
     paging: false,
     lengthMenu: -1,
     language: {
-      emptyTable: 'No Community Nodes Available'
+      emptyTable: 'No Community Nodes Found'
     },
     columnDefs: [
       {
@@ -31,20 +31,15 @@ $(document).ready(function () {
         }
       },
       {
-        targets: [2],
-        render: function (data, type, row, meta) {
-          if (type === 'display') {
-            data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00')
-          }
-          return data
-        }
-      },
-      {
         targets: [5],
         type: 'num',
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = data.ins + '/' + data.outs
+            if (!data.offline) {
+              data = data.ins + '/' + data.outs
+            } else {
+              data = ''
+            }
           } else if (type === 'sort') {
             data = data.ins + data.outs
           }
@@ -110,10 +105,11 @@ function getAndDrawNodeStats () {
             ssl: (node.ssl) ? ' <i class="fas fa-user-shield has-trtl-green" title="SSL Required"></i>' : '',
             cache: (node.cache) ? ' <i class="fas fa-tachometer-alt has-trtl-green" title="Blockchain Cache"></i>' : ''
           },
-          (node.version !== 'offline') ? node.fee.amount : '',
+          (node.version !== 'offline') ? numeral(node.fee.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') : '',
           (node.version !== 'offline') ? node.version : '',
           (node.version !== 'offline') ? numeral(node.height).format('0,0') : '',
           {
+            offline: (node.version === 'offline'),
             ins: node.connectionsIn,
             outs: node.connectionsOut
           },
