@@ -36,7 +36,7 @@ $(document).ready(function () {
         render: function (data, type, row, meta) {
           if (type === 'display') {
             if (!data.offline) {
-              data = data.ins + '/' + data.outs
+              data = data.ins + '/' + data.outs + ' (' + data.tx + ')'
             } else {
               data = ''
             }
@@ -111,7 +111,8 @@ function getAndDrawNodeStats () {
           {
             offline: !(node.version && node.version !== 'offline'),
             ins: node.connectionsIn,
-            outs: node.connectionsOut
+            outs: node.connectionsOut,
+            tx: numeral(node.txPoolSize).format('0,0')
           },
           {
             hist: hist.join(''),
