@@ -96,6 +96,16 @@ $(document).ready(function () {
         }
         return data
       }
+    },{
+      targets: 6,
+      render: function(data, type, row, meta) {
+        if (type === 'display' && data.url) {
+          data = '<a href="' + data.url + '" target="_blank">' + data.name + '</a>'
+        } else if (type === 'display') {
+          data = data.name
+        }
+        return data
+      }
     }],
     order: [
       [0, 'desc']
@@ -192,7 +202,7 @@ function updateTransactionPool(table) {
         ])
       }
       table.draw(false)
-      
+
       checkForSearchTerm()
     }
   })
@@ -216,13 +226,18 @@ function updateRecentBlocks(table, height) {
         chartData.push(
           [(new Date(block.timestamp * 1000 + ((new Date()).getTimezoneOffset() * 60 * 1000))), parseInt(block.difficulty), parseInt(block.size), parseInt(block.tx_count)]
         )
+
         table.row.add([
           numeral(block.height).format('0,0'),
           numeral(block.size).format('0,0'),
           block.hash,
-          numeral(block.difficulty).format('0,0'),
+          numeral(block.difficulty/1000/1000/1000).format('0,0.000') + ' B',
           numeral(block.tx_count).format('0,0'),
-          (new Date(block.timestamp * 1000)).toGMTString()
+          (new Date(block.timestamp * 1000)).toLocaleString(),
+          {
+            url: block.poolURL || false,
+            name: block.poolName || 'Scanning...'
+          }
         ])
       }
 

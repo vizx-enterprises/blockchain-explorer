@@ -151,11 +151,15 @@ a.navbar-item:hover {
 .trtl-fee,
 .trtl-type,
 .trtl-size,
+.trtl-height,
 .trtl-txns,
+.trtl-difficulty,
 .trtl-datetime,
 .trtl-icon {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .trtl-amount,
@@ -163,21 +167,26 @@ a.navbar-item:hover {
   width: 175px;
 }
 
+.trtl-height,
 .trtl-type {
   width: 100px;
 }
 
 .trtl-size,
 .trtl-txns {
-  width: 100px;
+  width: 80px;
 }
 
 .trtl-datetime {
-  width: 280px;
+  width: 200px;
 }
 
 .trtl-icon {
   width: 15px;
+}
+
+.trtl-difficulty {
+  width: 190px;
 }
 
 .is-ours {
