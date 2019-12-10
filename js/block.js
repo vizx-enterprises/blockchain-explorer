@@ -26,9 +26,12 @@ $(document).ready(function () {
       $('#previousBlockHash').html('<a href="/block.html?hash=' + block.prevHash + '">' + block.prevHash + '</a>')
       $('#transactionCount').text(block.transactions.length)
 
-      if (block.poolURL) {
+      const now = parseInt((new Date()).getTime() / 1000)
+      const nowDelta = now - block.timestamp
+
+      if (block.poolName && block.poolURL) {
         $('#poolName').html('<a href="' + block.poolURL + '">' + block.poolName + '</a>')
-      } else if (block.timestamp * 1000 < (new Date()).getTime() - (60 * 1000)) {
+      } else if (nowDelta > 120) {
         $('#poolName').text(block.poolName || 'Unknown')
       } else {
         $('#poolName').text(block.poolName || 'Scanning...')
