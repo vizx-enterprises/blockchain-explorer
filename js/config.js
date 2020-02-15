@@ -8,7 +8,7 @@ const ExplorerConfig = {
   startYear: 2018,
   genesisTimestamp: 1545261161,
   emissionCurveInterval: 2000,
-  emissionCurveDataPoints: 15000,
+  emissionCurveDataPoints: 30000,
   addressPrefix: 999730,
   forkHeights: [
     700000,
