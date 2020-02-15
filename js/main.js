@@ -231,12 +231,12 @@ function updateRecentBlocks(table, height) {
           numeral(block.height).format('0,0'),
           numeral(block.size).format('0,0'),
           block.hash,
-          numeral(block.difficulty/1000/1000/1000).format('0,0.000') + ' B',
+          numeral(block.difficulty/1000/1000).format('0,0.000') + ' M',
           numeral(block.tx_count).format('0,0'),
           (new Date(block.timestamp * 1000)).toLocaleString(),
           {
             url: block.poolURL || false,
-            name: block.poolName || 'Scanning...'
+            name: block.poolName || ''
           }
         ])
       }

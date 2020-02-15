@@ -29,14 +29,6 @@ $(document).ready(function () {
       const now = parseInt((new Date()).getTime() / 1000)
       const nowDelta = now - block.timestamp
 
-      if (block.poolName && block.poolURL) {
-        $('#poolName').html('<a href="' + block.poolURL + '">' + block.poolName + '</a>')
-      } else if (nowDelta > 120) {
-        $('#poolName').text(block.poolName || 'Unknown')
-      } else {
-        $('#poolName').text(block.poolName || 'Scanning...')
-      }
-
       const transactions = $('#transactions').DataTable({
         columnDefs: [{
           targets: [0, 1, 2, 3],
