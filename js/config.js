@@ -1,21 +1,19 @@
 const ExplorerConfig = {
-  apiBaseUrl: 'https://dego.bot.tips',
-  ticker: 'DEGO',
+  apiBaseUrl: 'https://btcmz.bot.tips',
+  ticker: 'BTCMZ',
   maxSupply: 10000000000000000,
   emissionSpeed: 24,
-  decimalPoints: 2,
-  blockTargetTime: 20,
-  startYear: 2018,
-  genesisTimestamp: 1545261161,
+  decimalPoints: 4,
+  blockTargetTime: 50,
+  startYear: 2019,
+  genesisTimestamp: 1549813997,
   emissionCurveInterval: 2000,
   emissionCurveDataPoints: 30000,
-  addressPrefix: 8411,
+  addressPrefix: 3771344,
   forkHeights: [
-    700000,
-    1470000,
-    1980000,
-    2250000,
-    2325000,
-    2400000
+    50000,
+    333000,
+    399000,
+    650000
   ]
 }
