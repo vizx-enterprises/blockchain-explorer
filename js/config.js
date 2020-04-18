@@ -1,19 +1,19 @@
 const ExplorerConfig = {
-  apiBaseUrl: 'https://btcmz.bot.tips',
-  ticker: 'BTCMZ',
-  maxSupply: 10000000000000000,
-  emissionSpeed: 24,
-  decimalPoints: 4,
-  blockTargetTime: 50,
-  startYear: 2019,
-  genesisTimestamp: 1549813997,
+  apiBaseUrl: 'https://cx.bot.tips',
+  ticker: 'CX',
+  maxSupply: 770000000000000,
+  emissionSpeed: 22,
+  decimalPoints: 7,
+  blockTargetTime: 60,
+  startYear: 2018,
+  genesisTimestamp: 1512800692,
   emissionCurveInterval: 2000,
   emissionCurveDataPoints: 30000,
-  addressPrefix: 3771344,
+  addressPrefix: 1515348,
   forkHeights: [
-    50000,
-    333000,
-    399000,
-    650000
+    21000,
+    170000,
+    394000,
+    770000
   ]
 }
