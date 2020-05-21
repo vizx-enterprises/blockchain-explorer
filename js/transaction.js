@@ -36,11 +36,11 @@ $(document).ready(function () {
     success: function (txn) {
       $('#transactionHeaderHash').text(txn.tx.hash)
       $('#transactionTimestamp').text((new Date(txn.block.timestamp * 1000)).toGMTString())
-      $('#transactionFee').text(numeral(txn.tx.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
+      $('#transactionFee').text(numeral(txn.tx.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
       $('#transactionConfirmations').text(numeral(txn.block.depth).format('0,0'))
       $('#transactionSize').text(numeral(txn.tx.size).format('0,0') + ' bytes')
       $('#transactionRingSize').text(numeral(txn.tx.mixin).format('0,0'))
-      $('#transactionAmount').text(numeral(txn.tx.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
+      $('#transactionAmount').text(numeral(txn.tx.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
       if (txn.tx.paymentId.length !== 0) {
         $('#transactionPaymentId').html('<a href="/paymentid.html?id=' + txn.tx.paymentId + '">' + txn.tx.paymentId + '</a>')
       }
@@ -60,7 +60,7 @@ $(document).ready(function () {
           targets: [0],
           render: function (data, type, row, meta) {
             if (type === 'display') {
-              data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00')
+              data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000')
             }
             return data
           },
@@ -98,7 +98,7 @@ $(document).ready(function () {
           targets: [0],
           render: function (data, type, row, meta) {
             if (type === 'display') {
-              data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00')
+              data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000')
             }
             return data
           },
@@ -171,7 +171,7 @@ function checkTransaction() {
     }
   })
 
-  $('#ourAmount').text(': Found ' + numeral(totalOwned / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
+  $('#ourAmount').text(': Found ' + numeral(totalOwned / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
 }
 
 function checkOutput(transactionPublicKey, key, address, output) {

@@ -40,7 +40,7 @@ $(document).ready(function () {
         targets: [0],
         render: function (data, type, row, meta) {
           if (type === 'display') {
-            data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker
+            data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker
           }
           return data
         }
