@@ -18,10 +18,10 @@ $(document).ready(function () {
       $('#blockVersion').text(block.majorVersion + '.' + block.minorVersion)
       $('#blockDifficulty').text(numeral(block.difficulty).format('0,0'))
       $('#blockSize').text(numeral(block.size).format('0,0') + ' bytes')
-      $('#blockBaseReward').text(numeral(block.baseReward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
-      $('#blockReward').text(numeral(block.reward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
+      $('#blockBaseReward').text(numeral(block.baseReward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
+      $('#blockReward').text(numeral(block.reward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
       $('#blockTransactionSize').text(numeral(block.transactionsCumulativeSize).format('0,0') + ' bytes')
-      $('#blockTransactionFees').text(numeral(block.totalFeeAmount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
+      $('#blockTransactionFees').text(numeral(block.totalFeeAmount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000') + ' ' + ExplorerConfig.ticker)
       $('#blockNonce').text(numeral(block.nonce).format('0,0'))
       $('#previousBlockHash').html('<a href="/block.html?hash=' + block.prevHash + '">' + block.prevHash + '</a>')
       $('#transactionCount').text(block.transactions.length)
@@ -60,8 +60,8 @@ $(document).ready(function () {
         var txn = block.transactions[i]
         transactions.row.add([
           txn.hash,
-          numeral(txn.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000'),
-          numeral(txn.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000'),
+          numeral(txn.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000'),
+          numeral(txn.amount_out / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00000000'),
           numeral(txn.size).format('0,0')
         ])
       }
