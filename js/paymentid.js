@@ -37,7 +37,7 @@ $(document).ready(function () {
             targets: [1, 2],
             render: function (data, type, row, meta) {
               if (type === 'display') {
-                data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00')
+                data = numeral(data / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000')
               }
               return data
             }

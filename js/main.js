@@ -157,10 +157,10 @@ function getAndDisplayLastBlockHeader() {
       $('#blockchainHeight').text(numeral(data.height).format('0,0'))
       $('#blockchainDifficulty').text(numeral(data.difficulty).format('0,0'))
       $('#blockchainHashRate').text(numeral(data.difficulty / ExplorerConfig.blockTargetTime).format('0,0') + ' H/s')
-      $('#blockchainReward').text(numeral(data.reward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
+      $('#blockchainReward').text(numeral(data.reward / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
       $('#blockchainTransactions').text(numeral(data.alreadyGeneratedTransactions).format('0,0'))
-      $('#blockchainCirculatingSupply').text(numeral(data.alreadyGeneratedCoins / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
-      $('#blockchainTotalSupply').text(numeral(ExplorerConfig.maxSupply / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') + ' ' + ExplorerConfig.ticker)
+      $('#blockchainCirculatingSupply').text(numeral(data.alreadyGeneratedCoins / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
+      $('#blockchainTotalSupply').text(numeral(ExplorerConfig.maxSupply / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000') + ' ' + ExplorerConfig.ticker)
 
       var nextFork
       for (var i = ExplorerConfig.forkHeights.length; i > 0; i--) {
@@ -195,8 +195,8 @@ function updateTransactionPool(table) {
       for (var i = 0; i < data.length; i++) {
         var txn = data[i]
         table.row.add([
-          numeral(txn.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00'),
-          numeral(txn.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00'),
+          numeral(txn.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000'),
+          numeral(txn.fee / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.000000'),
           numeral(txn.size).format('0,0'),
           txn.txnHash
         ])
