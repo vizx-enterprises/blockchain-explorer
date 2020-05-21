@@ -105,7 +105,7 @@ function getAndDrawNodeStats () {
             ssl: (node.ssl) ? ' <i class="fas fa-user-shield has-trtl-green" title="SSL Required"></i>' : '',
             cache: (node.cache) ? ' <i class="fas fa-tachometer-alt has-trtl-green" title="Blockchain Cache"></i>' : ''
           },
-          (node.version && node.version !== 'offline') ? numeral(node.fee.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.00') : '',
+          (node.version && node.version !== 'offline') ? numeral(node.fee.amount / Math.pow(10, ExplorerConfig.decimalPoints)).format('0,0.0000') : '',
           (node.version && node.version !== 'offline') ? node.version : '',
           (node.version && node.version !== 'offline') ? numeral(node.height).format('0,0') : '',
           {
